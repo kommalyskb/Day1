@@ -1,0 +1,56 @@
+﻿
+@if (Movies == null)
+{
+
+    @NullContent
+}
+else if (Movies.Count == 0)
+{
+    @EmptyContent
+}
+else
+{
+    <div>
+        <input type="checkbox" @bind="displayButton" />
+    </div>
+    
+    <div>
+        @foreach (var item in Movies)
+        {
+            <MovieIndividual Movie="item" Delete="DeleteMovie" displayButton="displayButton" />
+        }
+    </div>
+}
+
+
+
+@code {
+
+
+    // Content
+    [Parameter] public RenderFragment NullContent { get; set; }
+    [Parameter] public RenderFragment EmptyContent { get; set; }
+
+    // Data
+    [Parameter] public List<Movie> Movies { get; set; }
+
+    bool displayButton = false;
+
+    protected async override Task OnInitializedAsync()
+    {
+        // Waiting 3 seconds
+        await Task.Delay(2000);
+        // connect db or api
+        Movies = new List<Movie>()
+        {
+            new Movie(){ Title = "<b>Spider-Man: Far From Home</b>", ReleaseDate = new DateTime(2019,7,2)},
+            new Movie(){ Title = "Moana", ReleaseDate = new DateTime(2018,3,2)},
+            new Movie(){ Title = "Inception", ReleaseDate = new DateTime(2016,5,2)}
+        };
+    }
+
+    void DeleteMovie(Movie movie)
+    {
+        Console.WriteLine($"Delete Movie title {movie.Title}");
+    }
+}

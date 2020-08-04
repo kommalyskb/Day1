@@ -1,0 +1,12 @@
+﻿<label>@Default</label>
+<input type="text" @attributes="Additional"/>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object> Additional { get; set; }
+    [Parameter] public string Default { get; set; }
+    //placeholder
+    //disabled
+    //readonly
+
+}

@@ -1,0 +1,53 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<input type="text" @bind="currentCount" />
+
+<p>-----------------------------------</p>
+
+<GenericList List="Movies">
+    <NullContent>
+        <span style="color:red">Loading.....</span>
+    </NullContent>
+    <EmptyContent>
+        <span style="color:blue">No records</span>
+    </EmptyContent>
+    <ElementTemplate>
+        <MovieIndividual Movie="context" Delete="DeleteMovie" displayButton="true" />
+    </ElementTemplate>
+</GenericList>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    List<Movie> Movies;
+
+    protected async override Task OnInitializedAsync()
+    {
+        // Waiting 3 seconds
+        await Task.Delay(2000);
+        // connect db or api
+        Movies = new List<Movie>()
+        {
+            new Movie(){ Title = "<b>Spider-Man: Far From Home</b>", ReleaseDate = new DateTime(2019,7,2)},
+            new Movie(){ Title = "Moana", ReleaseDate = new DateTime(2018,3,2)},
+            new Movie(){ Title = "Inception", ReleaseDate = new DateTime(2016,5,2)}
+        };
+    }
+
+    void DeleteMovie(Movie movie)
+    {
+        Console.WriteLine($"Delete Movie title {movie.Title}");
+    }
+
+}

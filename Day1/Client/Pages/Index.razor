@@ -1,0 +1,44 @@
+﻿@page "/"
+
+
+<p>My name is @name</p>
+
+<p>2 + 2 = @(2+2)</p>
+
+<p>My name is @Utitlities.CustomToUpper(name)</p>
+
+<button @onclick="@(() => Console.WriteLine("I've been clicked"))">Click me</button>
+<p>-------------------------------------------</p>
+
+
+<MovieList>
+    <NullContent>
+        <span style="color:red">Loading.....</span>
+    </NullContent>
+    <EmptyContent>
+        <span style="color:blue">No records</span>
+    </EmptyContent>
+</MovieList>
+
+
+<TextboxD Default="Name" placeholder="Please input name" />
+
+@*<div>
+        @for (int i = 0; i < movies.Count; i++)
+        {
+            <div style="background-color: @(i%2 == 0 ? "blue": "red")">
+                <p>@(i+1)) Title: <b>@movies[i].Title</b></p>
+                <p>Relese Date: <b>@movies[i].ReleaseDate.ToString("dd MMM yyyy")</b></p>
+            </div>
+        }
+    </div>*@
+
+
+@code{
+
+    string name = "Kommaly Saykhambay";
+
+    
+
+
+}
